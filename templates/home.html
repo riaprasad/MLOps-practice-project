@@ -1,0 +1,102 @@
+
+<html>
+    <body>
+        <div class="login">
+            <h1>Student Exam Performance Indicator</h1>
+        
+            <form action="{{ url_for('predict_datapoint')}}" method="post">
+                <h1>
+                    <legend>Student Exam Performance Prediction</legend>
+                </h1>
+                
+                <div class="form-group">
+                    <label for="squareMeters">squareMeters:</label>
+                    <input type="number" id="squareMeters" name="squareMeters" placeholder="Enter sqmt of house (0-70000)">
+                </div>
+            
+                <div class="form-group">
+                    <label for="numberOfRooms">number of rooms:</label>
+                    <input type="number" id="numberOfRooms" name="numberOfRooms" placeholder="Enter num of rooms (1-100)">
+                </div>
+
+                <div class="form-group">  
+                    <label for="hasYard">Yard?</label>
+                    <input type="number" id="hasYard" name="hasYard" placeholder="0 or 1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hasPool">has Pool ?</label>
+                    <input type="number" id="hasPool" name="hasPool" placeholder="0 or 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="floors">floors</label>
+                    <input type="number" id="floors" name="floors" placeholder="Enter num of floors (1-100)">
+                </div>
+
+                <div class="form-group">
+                    <label for="cityCode">City Code</label>
+                    <input type="number" id="cityCode" name="cityCode" placeholder="Enter citycode (1-80000)">
+                </div>
+
+                <div class="form-group">
+                    <label for="cityPartRange">CityPartRange</label>
+                    <input type="number" id="cityPartRange" name="cityPartRange" placeholder="Enter cityPartRange (1-10)">
+                </div>
+
+                <div class="form-group">
+                    <label for="numPrevOwners">numPrevOwners</label>
+                    <input type="number" id="numPrevOwners" name="numPrevOwners" placeholder="Enter num of prev owner (1-10)">
+                </div>
+
+                <div class="form-group">
+                    <label for="made">Made In</label>
+                    <input type="number" id="made" name="made" placeholder="Enter year (1900-2025)">
+                </div>
+
+                <div class="form-group">
+                    <label for="isNewBuilt"> New Built?</label>
+                    <input type="number" id="isNewBuilt" name="isNewBuilt" placeholder="0 or 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="hasStormProtector"> Storm Protector? </label>
+                    <input type="number" id="hasStormProtector" name="hasStormProtector" placeholder="0 or 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="basement">basement</label>
+                    <input type="number" id="basement" name="basement" placeholder="Enter basement area (1-8000)">
+                </div>
+
+                <div class="form-group">
+                    <label for="attic">attic</label>
+                    <input type="number" id="attic" name="attic" placeholder="Enter attic area (1-8000)">
+                </div>
+
+                <div class="form-group">
+                    <label for="garage">garage</label>
+                    <input type="number" id="garage" name="garage" placeholder="Enter garage (1-800)">
+                </div>
+
+                <div class="form-group">
+                    <label for="hasStorageRoom">hasStorageRoom</label>
+                    <input type="number" id="hasStorageRoom" name="hasStorageRoom" placeholder="0 or 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="hasGuestRoom">hasGuestRoom</label>
+                    <input type="number" id="hasGuestRoom" name="hasGuestRoom" placeholder="Enter num of guest room (0-10)">
+                </div>
+                
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Predict House Price"  />
+                </div>
+                
+            </form>
+        </div>    
+        <h2>
+            The House Price Prediction is {{results}}
+        </h2>
+    </body>
+</html>
