@@ -80,6 +80,9 @@ def predict_PostmanApi():
         predict_pipeline = PredictPipeline()
         pred = predict_pipeline.predict(pred_df)
 
+        # pred = pred.tolist() if isinstance(pred, np.ndarray) else pred
+        pred = float(pred)
+
         d = {'price' : pred}
         return jsonify(d)
 
