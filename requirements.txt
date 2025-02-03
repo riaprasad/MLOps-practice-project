@@ -8,4 +8,5 @@ xgboost
 Flask
 ipykernel
 dill
+flask_cors
 #-e .
