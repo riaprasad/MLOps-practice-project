@@ -1,6 +1,7 @@
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template, jsonify
 import numpy as np
 import pandas as pd
+from flask_cors import CORS,cross_origin
 
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
@@ -37,16 +38,9 @@ def predict_datapoint():
             attic = request.form.get('attic'),
             garage = request.form.get('garage'),
             hasStorageRoom = request.form.get('hasStorageRoom'),
-            hasGuestRoom = request.form.get('hasGuestRoom'),
+            hasGuestRoom = request.form.get('hasGuestRoom')
 
-            # gender=request.form.get('gender'),
-            # race_ethnicity=request.form.get('ethnicity'),
-            # parental_level_of_education=request.form.get('parental_level_of_education'),
-            # lunch=request.form.get('lunch'),
-            # test_preparation_course=request.form.get('test_preparation_course'),
-            # reading_score=float(request.form.get('writing_score')),
-            # writing_score=float(request.form.get('reading_score'))
-
+            
         )
         pred_df=data.get_data_as_data_frame()
         print(pred_df)
@@ -57,6 +51,38 @@ def predict_datapoint():
         results=predict_pipeline.predict(pred_df)
         print("after Prediction")
         return render_template('home.html',results=results[0])
+    
+
+@app.route('/predictPostmanApi', methods=['POST']) 
+@cross_origin()
+def predict_PostmanApi():
+    if request.method == 'POST':
+        data = CustomData(
+            squareMeters = request.json['squareMeters'],
+            numberOfRooms = request.json['numberOfRooms'],
+            hasYard = request.json['hasYard'],
+            hasPool = request.json['hasPool'],
+            floors = request.json['floors'],
+            cityCode = request.json['cityCode'],
+            cityPartRange = request.json['cityPartRange'],
+            numPrevOwners = request.json['numPrevOwners'],
+            made = request.json['made'],
+            isNewBuilt = request.json['isNewBuilt'],
+            hasStormProtector = request.json['hasStormProtector'],
+            basement = request.json['basement'],
+            attic = request.json['attic'],
+            garage = request.json['garage'],
+            hasStorageRoom = request.json['hasStorageRoom'],
+            hasGuestRoom = request.json['hasGuestRoom']
+        )
+    
+        pred_df = data.get_data_as_data_frame()
+        predict_pipeline = PredictPipeline()
+        pred = predict_pipeline.predict(pred_df)
+
+        d = {'price' : pred}
+        return jsonify(d)
+
     
 
 if __name__=="__main__":
